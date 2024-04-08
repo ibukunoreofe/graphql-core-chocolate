@@ -1,6 +1,6 @@
 ﻿using GraphQL101HotChocolate.Models;
 using Microsoft.EntityFrameworkCore;
-namespace GraphQL101HotChocolate.Schema
+namespace GraphQL101HotChocolate.Schema.Queries
 {
     /// <summary>
     /// 

@@ -1,5 +1,7 @@
 using GraphQL101HotChocolate.Models;
-using GraphQL101HotChocolate.Schema;
+using GraphQL101HotChocolate.Schema.Mutations;
+using GraphQL101HotChocolate.Schema.Queries;
+using GraphQL101HotChocolate.Schema.Subscriptions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,10 +14,17 @@ builder.Services.AddPooledDbContextFactory<AppDbContext>(options =>
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
-    .AddProjections(); // This enables the use of projections, which allow for selecting specific fields in queries.
+    .AddMutationType<Mutation>()
+    .AddSubscriptionType<Subscription>()
+    .AddProjections() // This enables the use of projections, which allow for selecting specific fields in queries.
+    .AddFiltering() // Optional, if you're using filtering
+    .AddSorting() // Optional, if you're using sorting; 
+    .AddInMemorySubscriptions(); // For events; 
 
 // build app
 var app = builder.Build();
+
+app.UseWebSockets();
 
 app.MapGraphQL();
 
