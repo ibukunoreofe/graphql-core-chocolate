@@ -195,3 +195,6 @@ ModelManifest.xml
 .idea/*
 packages
 !.gitignore
+
+appsettings.*
+!appsettings.Example.json
